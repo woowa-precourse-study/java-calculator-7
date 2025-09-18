@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.util.Constant;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -10,13 +11,13 @@ public class Application {
     // TODO: 프로그램 구현
 
     //Input Controller 부분
-    System.out.println("덧셈할 문자열을 입력해 주세요");
+    System.out.println(Constant.INPUT_ERROR_MESSAGE);
     String stringInput = Console.readLine();
 
     // Validator 부분
-    if (!Pattern.matches("^\\d+(?:[,:]\\d+)*$", stringInput))
+    if (!Pattern.matches(Constant.INPUT_STRING_REGEX, stringInput))
     {
-      throw new IllegalArgumentException("문자열 형식이 올바르지 않습니다.");
+      throw new IllegalArgumentException(Constant.INPUT_ERROR_MESSAGE);
     }
 
     // Parser 부분
@@ -33,7 +34,7 @@ public class Application {
     }
 
     // Output Controller 부분
-    System.out.println("결과 : " + sum);
+    System.out.println(Constant.OUTPUT_MESSAGE+ sum);
 
   }
 }
