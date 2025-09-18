@@ -1,14 +1,37 @@
 package calculator;
 
 import calculator.util.Constant;
+import calculator.util.ParsedResult;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
 
-  public static String validate(String input) {
-    if (!Pattern.matches(Constant.INPUT_STRING_REGEX, input)) {
-      throw new IllegalArgumentException(Constant.INPUT_ERROR_MESSAGE);
+  public static ParsedResult validate(String input) {
+    if (input == null) {
+      throw new IllegalArgumentException(Constant.NORMAL_INPUT_ERROR_MESSAGE);
     }
-    return input;
+    input = input.replace("\\n", "\n");
+
+    //일반 문자열 검증
+    if (Pattern.matches(Constant.NORMAL_INPUT_STRING_REGEX, input)) {
+      return new ParsedResult(null, input);
+    }
+
+    Matcher matcher = Pattern.compile(Constant.CUSTOM_INPUT_STRING_REGEX).matcher(input);
+    if (!matcher.matches()) {
+      throw new IllegalArgumentException(Constant.CUSTOM_INPUT_ERROR_MESSAGE);
+    }
+    String customSeparator = matcher.group(1);;
+    String mainString = matcher.group(2);
+    System.out.println("this is main" + mainString);
+
+    String allowedSeparator = "(?:,|:|" + Pattern.quote(customSeparator) + ")";
+    String finalPattern = "^\\d+(?:" + allowedSeparator + "\\d+)*$";
+    if (!Pattern.matches(finalPattern, mainString)) {
+      throw new IllegalArgumentException(Constant.CUSTOM_INPUT_ERROR_MESSAGE);
+    }
+    return new ParsedResult(customSeparator, mainString);
   }
+
 }
