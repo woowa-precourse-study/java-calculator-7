@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.util.Constant;
-import calculator.util.ParsedResult;
+import calculator.dto.ParsedResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
