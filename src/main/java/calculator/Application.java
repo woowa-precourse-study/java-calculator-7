@@ -10,15 +10,12 @@ public class Application {
   public static void main(String[] args) {
     // TODO: 프로그램 구현
 
-    //Input Controller 부분
-    System.out.println(Constant.INPUT_ERROR_MESSAGE);
-    String stringInput = Console.readLine();
+
+    InputController inputController = new InputController();
+    String stringInput = inputController.getString();
 
     // Validator 부분
-    if (!Pattern.matches(Constant.INPUT_STRING_REGEX, stringInput))
-    {
-      throw new IllegalArgumentException(Constant.INPUT_ERROR_MESSAGE);
-    }
+    Validator.validate(stringInput);
 
     // Parser 부분
     String[] targetNumbers = stringInput.split("[,:]");
