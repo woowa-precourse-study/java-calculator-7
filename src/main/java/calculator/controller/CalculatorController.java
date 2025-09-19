@@ -1,12 +1,12 @@
-package calculator.runner;
+package calculator.controller;
 
-import calculator.io.InputView;
-import calculator.io.OutputView;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import calculator.service.CalculatorService;
 import calculator.service.impl.CalculatorServiceImpl;
 
 
-public class CalculatorRunner {
+public class CalculatorController {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
 
     public void run() {
