@@ -1,16 +1,13 @@
 package calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
-
-import java.util.ResourceBundle;
+import calculator.message.MessageCode;
 
 public class InputView {
-    private static final ResourceBundle messages = ResourceBundle.getBundle("messages");
-
     private InputView() {}
 
     public static String readInput() {
-        System.out.println(messages.getString("input.guide"));
+        System.out.println(MessageCode.INPUT_GUIDE.getMessage());
         return Console.readLine();
     }
 }

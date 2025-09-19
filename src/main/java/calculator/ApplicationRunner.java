@@ -11,8 +11,8 @@ public class ApplicationRunner {
         try {
             controller.run();
         } catch (CalculatorException e) {
-            // 예외 메시지 출력 책임은 여기서만
             OutputView.printError(e.getMessage());
+            throw e;
         }
     }
 }

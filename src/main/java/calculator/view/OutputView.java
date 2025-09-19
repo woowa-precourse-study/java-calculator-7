@@ -1,20 +1,15 @@
 package calculator.view;
 
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
+import calculator.message.MessageCode;
 
 public class OutputView {
-    private static final ResourceBundle messages = ResourceBundle.getBundle("messages");
-
     private OutputView() {}
 
     public static void printResult(int result) {
-        String format = messages.getString("result.format");
-        System.out.println(MessageFormat.format(format, result));
+        System.out.println(String.format(MessageCode.RESULT_FORMAT.getMessage(), result));
     }
 
     public static void printError(String message) {
-        String format = messages.getString("error.format");
-        System.out.println(MessageFormat.format(format, message));
+        System.out.println(String.format(MessageCode.ERROR_FORMAT.getMessage(), message));
     }
 }
