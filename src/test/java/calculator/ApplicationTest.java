@@ -9,6 +9,39 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ApplicationTest extends NsTest {
     @Test
+    void 정상_테스트_구분자_하나()  {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 정상_테스트_구분자_둘()  {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 사용자_지정_구분자_괄호()  {
+        assertSimpleTest(() -> {
+            run("//)\\n1)2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 사용자_지정_구분자_별()  {
+        assertSimpleTest(() -> {
+            run("//*\\n1*2:3,4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+
+    @Test
     void 커스텀_구분자_사용() {
         assertSimpleTest(() -> {
             run("//;\\n1");
@@ -23,6 +56,25 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
+    @Test
+    void 정의되지않은_구분자_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;\\n1.2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_예외_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//;;\\n1;3"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
     @Override
     public void runMain() {
