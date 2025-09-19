@@ -46,12 +46,12 @@ public class Calculator {
     }
 
     private class CustomController {
-        private static final String VALID_CUSTOM_INPUT = "^//(.*)\\\\n(.*)";
+        private static final String CUSTOM_DELIMITER_PATTERN = "^//(.*)\\\\n(.*)";
         private static final int CUSTOM_DELIMITER_GROUP = 1;
         private static final int CUSTOM_PURE_INPUT_GROUP = 2;
 
         private String getNewInputIfCustom(String input) {
-            Pattern pattern = Pattern.compile(VALID_CUSTOM_INPUT);
+            Pattern pattern = Pattern.compile(CUSTOM_DELIMITER_PATTERN);
             Matcher matcher = pattern.matcher(input);
 
             if (matcher.matches()) {
