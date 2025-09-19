@@ -1,8 +1,9 @@
-package calculator.service;
+package calculator.domain.calculator.service.impl;
 
-import calculator.error.CalculatorException;
-import calculator.error.ErrorCode;
-import calculator.util.DelimiterParser;
+import calculator.domain.calculator.service.CalculatorService;
+import calculator.global.error.CalculatorException;
+import calculator.global.error.ErrorCode;
+import calculator.domain.calculator.util.DelimiterParser;
 
 public class CalculatorServiceImpl implements CalculatorService {
     private static final String NUMBER_REGEX = "\\d+";

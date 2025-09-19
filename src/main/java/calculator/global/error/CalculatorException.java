@@ -1,4 +1,4 @@
-package calculator.error;
+package calculator.global.error;
 
 public class CalculatorException extends IllegalArgumentException {
     private final ErrorCode errorCode;

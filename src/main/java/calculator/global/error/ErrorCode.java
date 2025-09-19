@@ -1,4 +1,4 @@
-package calculator.error;
+package calculator.global.error;
 
 public enum ErrorCode {
     INVALID_CUSTOM_DELIMITER("잘못된 커스텀 구분자 입력입니다."),

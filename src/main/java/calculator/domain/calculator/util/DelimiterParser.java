@@ -1,7 +1,7 @@
-package calculator.util;
+package calculator.domain.calculator.util;
 
-import calculator.error.CalculatorException;
-import calculator.error.ErrorCode;
+import calculator.global.error.CalculatorException;
+import calculator.global.error.ErrorCode;
 
 import java.util.ArrayList;
 import java.util.List;

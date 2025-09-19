@@ -1,6 +1,6 @@
-package calculator.view;
+package calculator.domain.calculator.view;
 
-import calculator.message.MessageCode;
+import calculator.global.message.MessageCode;
 
 public class OutputView {
     private OutputView() {}

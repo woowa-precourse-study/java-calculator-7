@@ -1,7 +1,7 @@
-package calculator.view;
+package calculator.domain.calculator.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import calculator.message.MessageCode;
+import calculator.global.message.MessageCode;
 
 public class InputView {
     private InputView() {}

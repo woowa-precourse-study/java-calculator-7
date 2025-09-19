@@ -1,8 +1,8 @@
-package calculator;
+package calculator.global;
 
-import calculator.controller.CalculatorController;
-import calculator.view.OutputView;
-import calculator.error.CalculatorException;
+import calculator.domain.calculator.controller.CalculatorController;
+import calculator.domain.calculator.view.OutputView;
+import calculator.global.error.CalculatorException;
 
 public class ApplicationRunner {
     private final CalculatorController controller = new CalculatorController();

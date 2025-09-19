@@ -1,4 +1,4 @@
-package calculator.message;
+package calculator.global.message;
 
 public enum MessageCode {
     INPUT_GUIDE("덧셈할 문자열을 입력해 주세요."),

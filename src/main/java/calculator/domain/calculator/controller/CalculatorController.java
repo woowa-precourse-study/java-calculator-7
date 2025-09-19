@@ -1,9 +1,9 @@
-package calculator.controller;
+package calculator.domain.calculator.controller;
 
-import calculator.service.CalculatorService;
-import calculator.service.CalculatorServiceImpl;
-import calculator.view.InputView;
-import calculator.view.OutputView;
+import calculator.domain.calculator.service.CalculatorService;
+import calculator.domain.calculator.service.impl.CalculatorServiceImpl;
+import calculator.domain.calculator.view.InputView;
+import calculator.domain.calculator.view.OutputView;
 
 public class CalculatorController {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
