@@ -1,17 +1,20 @@
 package calculator.view;
 
-public class OutputView {
-    private static final String RESULT_FORMAT = "결과 : %d";
-    private static final String ERROR_FORMAT = "오류: %s";
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
-    private OutputView() {
-    }
+public class OutputView {
+    private static final ResourceBundle messages = ResourceBundle.getBundle("messages");
+
+    private OutputView() {}
 
     public static void printResult(int result) {
-        System.out.println(String.format(RESULT_FORMAT, result));
+        String format = messages.getString("result.format");
+        System.out.println(MessageFormat.format(format, result));
     }
 
     public static void printError(String message) {
-        System.out.println(String.format(ERROR_FORMAT, message));
+        String format = messages.getString("error.format");
+        System.out.println(MessageFormat.format(format, message));
     }
 }

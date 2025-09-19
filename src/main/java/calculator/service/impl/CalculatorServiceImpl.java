@@ -1,11 +1,11 @@
-package calculator.service.impl;
+package calculator.service;
 
-import calculator.service.CalculatorService;
+import calculator.error.CalculatorException;
+import calculator.error.ErrorCode;
 import calculator.util.DelimiterParser;
 
 public class CalculatorServiceImpl implements CalculatorService {
     private static final String NUMBER_REGEX = "\\d+";
-    private static final String ERROR_INVALID_NUMBER = "허용되지 않은 값이 포함되어 있습니다: ";
 
     @Override
     public int calculate(String input) {
@@ -21,17 +21,13 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     private int sumTokens(String[] tokens) {
         int sum = 0;
-
         for (String token : tokens) {
-            if (token.isEmpty()) {
-                continue;
-            }
+            if (token.isEmpty()) continue;
             if (!token.matches(NUMBER_REGEX)) {
-                throw new IllegalArgumentException(ERROR_INVALID_NUMBER + token);
+                throw new CalculatorException(ErrorCode.INVALID_NUMBER, token);
             }
             sum += Integer.parseInt(token);
         }
-
         return sum;
     }
 }
