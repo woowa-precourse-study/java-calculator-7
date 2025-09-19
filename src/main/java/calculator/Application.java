@@ -1,63 +1,49 @@
 package calculator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        String[] officialSign = new String[]{",", ":"};
-        String[] customSign = new String[]{"//", "\\n"};
-
-
         System.out.println("덧셈할 문자열을 입력해 주세요.");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int result = 0;
-        StringBuilder input = new StringBuilder();
+        String input = Console.readLine();
+
         try {
-            input = new StringBuilder(br.readLine());
-
-            // 1) "// ~ \n" 세트는 우선 전부 공백으로 치환 (검증에서 제외)
-            String temp = input.toString().replaceAll("//.*?\\\\n", " ");
-
-            // 2) 이제 숫자, ',', ':' 만 남아야 함
-            if (!temp.matches("[0-9,: ]+")) {
-                throw new IllegalArgumentException("허용되지 않은 문자가 포함되어 있습니다: " + input);
-            }
-
-
-        } catch (IOException | IllegalArgumentException e) {
+            int result = calculate(input);
+            System.out.println("결과 : " + result);
+        } catch (IllegalArgumentException e) {
             System.out.println("오류: " + e.getMessage());
-            return;
+        }
+    }
+
+    private static int calculate(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
         }
 
+        String delimiter = "[,:]"; // 기본 구분자
 
-        for (int i = 0; i < 3; i++) {
-            String[] parts;
-            if (i == 2) {
-                parts = input.toString().split("//.*?\\\\\\\\n");
-                input = new StringBuilder();
-                for (String part : parts) {
-                    if (part.matches("\\d+")) { // 숫자인 경우만
-                        result += Integer.parseInt(part);
-                    }
-                }
-            } else {
-                parts = input.toString().split(officialSign[i]);
-                input = new StringBuilder();
-                for (String part : parts) {
-                    if (part.matches("\\d+")) {
-                        result += Integer.parseInt(part);
-                        continue;
-                    }
-                    input.append(part);
-                }
+        // 커스텀 구분자 처리
+        if (input.startsWith("//")) {
+            int newlineIndex = input.indexOf("\n");
+            if (newlineIndex == -1) {
+                throw new IllegalArgumentException("잘못된 커스텀 구분자 입력입니다.");
             }
-
+            delimiter = input.substring(2, newlineIndex);
+            input = input.substring(newlineIndex + 1);
         }
 
+        // split
+        String[] tokens = input.split(delimiter);
+        int sum = 0;
 
-        System.out.println(result);
+        for (String token : tokens) {
+            if (token.isEmpty()) continue; // 빈 값 무시
+            if (!token.matches("\\d+")) {
+                throw new IllegalArgumentException("허용되지 않은 값이 포함되어 있습니다: " + token);
+            }
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 }
