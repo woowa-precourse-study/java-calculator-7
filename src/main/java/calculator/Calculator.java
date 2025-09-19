@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-    private static Delimiter delimiter;
+    private Delimiter delimiter;
     private String[] numbers;
     private int result;
 
@@ -13,7 +13,8 @@ public class Calculator {
             return 0;
         }
 
-        input = CustomController.getNewInputIfCustom(input);
+        CustomController customController = new CustomController();
+        input = customController.getNewInputIfCustom(input);
 
         if (delimiter == null) {
             delimiter = new Delimiter();
@@ -44,12 +45,12 @@ public class Calculator {
         return result + number;
     }
 
-    private abstract static class CustomController {
+    private class CustomController {
         private static final String VALID_CUSTOM_INPUT = "^//(.*)\\\\n(.*)";
         private static final int CUSTOM_DELIMITER_GROUP = 1;
         private static final int CUSTOM_PURE_INPUT_GROUP = 2;
 
-        private static String getNewInputIfCustom(String input) {
+        private String getNewInputIfCustom(String input) {
             Pattern pattern = Pattern.compile(VALID_CUSTOM_INPUT);
             Matcher matcher = pattern.matcher(input);
 
@@ -61,11 +62,11 @@ public class Calculator {
             return input;
         }
 
-        private static String extractCustomDelimiter(Matcher matcher) {
+        private String extractCustomDelimiter(Matcher matcher) {
             return matcher.group(CUSTOM_DELIMITER_GROUP);
         }
 
-        private static String extractPureInput(Matcher matcher) {
+        private String extractPureInput(Matcher matcher) {
             return matcher.group(CUSTOM_PURE_INPUT_GROUP);
         }
     }
