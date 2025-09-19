@@ -33,7 +33,7 @@ public class Calculator {
             try {
                 result = safeAdd(result, Integer.parseUnsignedInt(number));
             } catch (RuntimeException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(e);
             }
         }
     }
