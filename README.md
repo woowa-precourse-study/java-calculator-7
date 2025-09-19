@@ -27,4 +27,3 @@
 ### 리펙토링
 - [x] CustomController 클래스를 내부클래스로 변경, static 메서드를 인스턴스 메서드로 변경
 - [x] 예외 발생 시 IllegalArgumentException(e)를 던져 stacktrace에 에러메시지 출력
-- [x] 변수 이름 변경 VALID_CUSTOM_INPUT -> CUSTOM_DELIMITER_PATTERN
