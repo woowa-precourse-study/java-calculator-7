@@ -1,15 +1,25 @@
 package calculator.controller;
 
-import calculator.util.Constant;
-import camp.nextstep.edu.missionutils.Console;
+import calculator.service.CalculatorService;
+import calculator.util.Parser;
+import calculator.view.CalculatorView;
 
 public class CalculatorController {
-  public String getString() {
-    System.out.println(Constant.REQUIRE_INPUT_MESSAGE);
-    String stringInput = Console.readLine();
-    return stringInput;
+
+  private final CalculatorView calculatorView;
+
+  public CalculatorController(CalculatorView calculatorView) {
+    this.calculatorView = calculatorView;
   }
-  public static void printResult(int result){
-    System.out.println(Constant.OUTPUT_MESSAGE + result);
+
+  public void run() {
+    try {
+      String input = calculatorView.readInput();
+      int[] targetNumbers = Parser.parseStringToIntArray(input);
+      int result = CalculatorService.calculate(targetNumbers);
+      calculatorView.printResult(result);
+    } catch (IllegalAccessError e) {
+      e.printStackTrace();
+    }
   }
 }

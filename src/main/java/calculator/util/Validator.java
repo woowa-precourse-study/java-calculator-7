@@ -1,6 +1,5 @@
-package calculator;
+package calculator.util;
 
-import calculator.util.Constant;
 import calculator.dto.ParsedResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,9 +21,10 @@ public class Validator {
     if (!matcher.matches()) {
       throw new IllegalArgumentException(Constant.CUSTOM_INPUT_ERROR_MESSAGE);
     }
-    String customSeparator = matcher.group(1);;
+    String customSeparator = matcher.group(1);
     String mainString = matcher.group(2);
-    System.out.println("this is main" + mainString);
+    //디버깅 코드
+//    System.out.println("this is main" + mainString);
 
     String allowedSeparator = "(?:,|:|" + Pattern.quote(customSeparator) + ")";
     String finalPattern = "^\\d+(?:" + allowedSeparator + "\\d+)*$";

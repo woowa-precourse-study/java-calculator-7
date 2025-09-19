@@ -1,6 +1,6 @@
 package calculator.util;
 
-import calculator.Validator;
+import calculator.dto.ParsedResult;
 import java.util.regex.Pattern;
 
 public class Parser {

@@ -1,4 +1,4 @@
-package calculator.util;
+package calculator.dto;
 
 public class ParsedResult {
   private final String customSeparator;
