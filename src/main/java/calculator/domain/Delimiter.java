@@ -3,9 +3,12 @@ package calculator.domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 구분자(사용자 지정 구분자 포함)를 생성하는 책임을 진다.
+ */
 public class Delimiter {
 
-    public static final String DEFAULT_DELIMITER=",|/n";
+    public static final String DEFAULT_DELIMITER=Pattern.quote(",")+"|"+Pattern.quote(":");
     private final String delimiter;
 
     private Delimiter(String delimiter) {
@@ -14,8 +17,8 @@ public class Delimiter {
     }
 
     public static Delimiter buildDelimiter(String inputString) {
-        if (inputString!=null){
-            return new Delimiter(Delimiter.DEFAULT_DELIMITER+"|"+Pattern.quote(inputString));
+        if (!inputString.isEmpty()) {
+            return new Delimiter(Delimiter.DEFAULT_DELIMITER+inputString);
         }
         return new Delimiter(DEFAULT_DELIMITER);
     }
