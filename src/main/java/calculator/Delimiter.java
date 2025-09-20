@@ -4,7 +4,7 @@ public class Delimiter {
     private final String delimiter;
 
     public Delimiter() {
-        delimiter = ",;";
+        delimiter = ",:";
     }
 
     public Delimiter(String customDelimiter) {
