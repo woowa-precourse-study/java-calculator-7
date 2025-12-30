@@ -3,17 +3,17 @@ package calculator.domain;
 public class Number {
     private final int number;
 
-    public Number(String num){
-        int number=validateIsNumber(num);
+    public Number(String num) {
+        int number = validateIsNumber(num);
         validatePositiveNumber(number);
-        this.number=number;
+        this.number = number;
     }
 
 
     private int validateIsNumber(String input) {
-        try{
+        try {
             return Integer.parseInt(input);
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
     }
@@ -24,10 +24,9 @@ public class Number {
         }
     }
 
-    public int getNumber(){
+    public int getNumber() {
         return number;
     }
-
 
 
 }
