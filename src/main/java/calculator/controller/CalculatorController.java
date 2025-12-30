@@ -2,6 +2,8 @@ package calculator.controller;
 
 import calculator.service.CalculatorService;
 
+import java.util.NoSuchElementException;
+
 public class CalculatorController {
     private final InputView inputView;
     private final CalculatorService service;
@@ -12,10 +14,14 @@ public class CalculatorController {
     }
 
     public void run() {
-        String input = inputView.readMessage();
-        OutputView.printResult(service.calculateTotal(input));
-    }
+        try {
+            String input = inputView.readMessage();
+            OutputView.printResult(service.calculateTotal(input));
+        } catch (NoSuchElementException e){
+            OutputView.printResult(0);
+        }
 
+    }
 
 }
 
