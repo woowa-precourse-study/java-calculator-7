@@ -13,13 +13,16 @@ public class CalculatorService {
     public int calculateTotal(String message) {
         Delimeter delimeter = new Delimeter();
         message = parsingMessage(message, delimeter);
+        if (message.isBlank()) {
+            return 0;
+        }
         List<String> nums = List.of(message.split(delimeter.getTotalDelimeter()));
         Numbers numbers = new Numbers(nums);
         return numbers.getSum();
     }
 
-    private static String parsingMessage(String message, Delimeter delimeter) {
-        Pattern pattern = Pattern.compile("//[\\S{1}]\\\\n");
+    public static String parsingMessage(String message, Delimeter delimeter) {
+        Pattern pattern = Pattern.compile("//(.)\\\\n");
         while (!message.isBlank()) {
             Matcher matcher = pattern.matcher(message);
             if (matcher.find()) {

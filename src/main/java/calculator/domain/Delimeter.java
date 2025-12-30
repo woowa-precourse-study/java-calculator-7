@@ -16,9 +16,8 @@ public class Delimeter {
     }
 
     public String getTotalDelimeter() {
-        List<String> mergedList = new ArrayList<>();
-        mergedList.addAll(List.copyOf(defaultDelimeter));
-        mergedList.addAll(List.copyOf(customDelimeter));
+        List<String> mergedList = new ArrayList<>(defaultDelimeter);
+        mergedList.addAll(customDelimeter);
         return String.join("|", mergedList);
     }
 }
