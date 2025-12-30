@@ -14,13 +14,13 @@ public class Number {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("[ERROR] 숫자가 아닙니다.");
         }
     }
 
     private void validatePositiveNumber(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 음수는 입력할 수 없습니다.");
         }
     }
 

@@ -2,6 +2,7 @@ package calculator.service;
 
 import calculator.domain.Delimeter;
 import calculator.domain.Numbers;
+import calculator.exception.Validator;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -22,7 +23,7 @@ public class CalculatorService {
         while (!message.isBlank()) {
             Matcher matcher = pattern.matcher(message);
             if (matcher.find()) {
-                validateInputFormat(matcher);
+                Validator.validateInputFormat(matcher);
                 delimeter.addCustomDelimeter(String.valueOf(matcher.group().charAt(2)));
                 message = message.substring(5);
                 continue;
@@ -31,12 +32,5 @@ public class CalculatorService {
         }
         return message;
     }
-
-    private static void validateInputFormat(Matcher matcher) {
-        if (matcher.start() != 0) {
-            throw new IllegalArgumentException("[ERROR] 입력 형식이 올바르지 않습니다.");
-        }
-    }
-
 
 }
