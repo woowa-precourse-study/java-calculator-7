@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.domain.Delimeter;
 import calculator.service.CalculatorService;
 
 import java.util.Arrays;
@@ -18,9 +19,8 @@ public class CalculatorController {
 
     public void run() {
         String names = inputView.readMessage();
-        String delimeters= String.join("|",List.of(Pattern.quote(","),Pattern.quote(":")));
 
-
+        Delimeter delimeter=new Delimeter();
         Pattern pattern = Pattern.compile("//[\\S{1}]\\\\n");
         while(!names.isBlank()){
             Matcher matcher = pattern.matcher(names);
@@ -28,8 +28,7 @@ public class CalculatorController {
                 if (matcher.start( )!=0){
                     throw new IllegalArgumentException("[ERROR] 입력 형식이 올바르지 않습니다.");
                 }
-                char customDelimeter = matcher.group().charAt(2);
-                delimeters+="|"+Pattern.quote(String.valueOf(customDelimeter));
+                delimeter.addCustomDelimeter(String.valueOf(matcher.group().charAt(2)));
                 names=names.substring(5);
                 continue;
             }
@@ -38,7 +37,7 @@ public class CalculatorController {
 
 
 
-        int[] numbers = Arrays.stream(names.split(delimeters))
+        int[] numbers = Arrays.stream(names.split(delimeter.getTotalDelimeter()))
                 .mapToInt(Integer::parseInt).toArray();
         for (int num:numbers){
             if (num<0){
