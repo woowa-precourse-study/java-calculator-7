@@ -22,15 +22,20 @@ public class CalculatorController {
 
 
         Pattern pattern = Pattern.compile("//[\\S{1}]\\\\n");
-        Matcher matcher = pattern.matcher(names);
-        if (matcher.find()){
-            if (matcher.start( )!=0){
-                throw new IllegalArgumentException("[ERROR] 입력 형식이 올바르지 않습니다.");
+        while(!names.isBlank()){
+            Matcher matcher = pattern.matcher(names);
+            if (matcher.find()){
+                if (matcher.start( )!=0){
+                    throw new IllegalArgumentException("[ERROR] 입력 형식이 올바르지 않습니다.");
+                }
+                char customDelimeter = matcher.group().charAt(2);
+                delimeters+="|"+Pattern.quote(String.valueOf(customDelimeter));
+                names=names.substring(5);
+                continue;
             }
-            char customDelimeter = matcher.group().charAt(2);
-            delimeters+="|"+Pattern.quote(String.valueOf(customDelimeter));
-            names=names.substring(5);
+            break;
         }
+
 
 
         int[] numbers = Arrays.stream(names.split(delimeters))
